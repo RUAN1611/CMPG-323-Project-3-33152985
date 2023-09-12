@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 using Models;
 
 namespace Data
 {
     public partial class SuperStoreContext : DbContext
     {
+        private IConfiguration Configuration { get; set; }
+
         public SuperStoreContext()
         {
         }
 
-        public SuperStoreContext(DbContextOptions<SuperStoreContext> options)
+        public SuperStoreContext(DbContextOptions<SuperStoreContext> options, IConfiguration configuration)
             : base(options)
         {
+            Configuration = configuration;
         }
 
         public virtual DbSet<Customer> Customers { get; set; } = null!;
@@ -24,7 +28,7 @@ namespace Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

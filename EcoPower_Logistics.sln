@@ -5,6 +5,10 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcoPower_Logistics", "SuperStore P3\EcoPower_Logistics.csproj", "{0442DF05-05B1-4E74-A9A8-3237AC8C9C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoPower_Logistics.DataAccess", "EcoPower_Logistics.DataAccess\EcoPower_Logistics.DataAccess.csproj", "{8F0817EB-DC4A-4864-AC4F-72C600235E06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoPower_Logistics.Models", "EcoPower_Logistics.Models\EcoPower_Logistics.Models.csproj", "{3801EFC4-AFF5-4709-9961-3D51AC1DEFB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0442DF05-05B1-4E74-A9A8-3237AC8C9C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0442DF05-05B1-4E74-A9A8-3237AC8C9C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0442DF05-05B1-4E74-A9A8-3237AC8C9C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0817EB-DC4A-4864-AC4F-72C600235E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0817EB-DC4A-4864-AC4F-72C600235E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0817EB-DC4A-4864-AC4F-72C600235E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0817EB-DC4A-4864-AC4F-72C600235E06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3801EFC4-AFF5-4709-9961-3D51AC1DEFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3801EFC4-AFF5-4709-9961-3D51AC1DEFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3801EFC4-AFF5-4709-9961-3D51AC1DEFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3801EFC4-AFF5-4709-9961-3D51AC1DEFB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
