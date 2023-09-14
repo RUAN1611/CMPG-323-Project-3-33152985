@@ -9,8 +9,10 @@ namespace EcoPower_Logistics.DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter);
-        T Get(Expression<Func<T, bool>>? filter);
+        Task<IEnumerable<T>> GetAll();
+        Task<T> Get(Expression<Func<T, bool>>? filter);
+        Task<T> GetById(int? id);
+        bool Exists(Expression<Func<T, bool>>? filter);
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

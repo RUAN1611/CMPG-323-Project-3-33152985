@@ -11,9 +11,9 @@ namespace EcoPower_Logistics.DataAccess.Repository
 {
     public class CustomerRepository:Repository<Customer>, ICustomerRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly SuperStoreContext _db;
 
-        public CustomerRepository(ApplicationDbContext db) : base(db)
+        public CustomerRepository(SuperStoreContext db) : base(db)
         {
             _db = db;
         }

@@ -12,21 +12,21 @@ namespace EcoPower_Logistics.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _db;
+        private readonly SuperStoreContext _db;
         internal DbSet<T> dbSet;
 
-        public Repository(ApplicationDbContext db)
+        public Repository(SuperStoreContext db)
         {
             _db = db;
             this.dbSet = _db.Set<T>();
         }
 
-        public void Add(T entity)
+        public async void Add(T entity)
         {
-            dbSet.Add(entity);
+            await dbSet.AddAsync(entity);
         }
 
-        public T Get(Expression<Func<T, bool>>? filter)
+        public async Task<T> Get(Expression<Func<T, bool>>? filter)
         {
             IQueryable<T> query = dbSet;
 
@@ -35,10 +35,15 @@ namespace EcoPower_Logistics.DataAccess.Repository
                 query = query.Where(filter);
             }
 
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter)
+        public async Task<T> GetById(int? id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
+        public bool Exists(Expression<Func<T, bool>>? filter)
         {
             IQueryable<T> query = dbSet;
 
@@ -46,13 +51,27 @@ namespace EcoPower_Logistics.DataAccess.Repository
             {
                 query = query.Where(filter);
             }
+
+            if(query.Count() > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            IQueryable<T> query = dbSet;
 
             return query;
         }
 
+        // Remove methods will not be async for concurrency control management.
+
         public void Remove(T entity)
         {
-            dbSet?.Remove(entity);
+            dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)

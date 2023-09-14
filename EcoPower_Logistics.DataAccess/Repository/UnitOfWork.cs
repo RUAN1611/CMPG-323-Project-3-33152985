@@ -10,10 +10,10 @@ namespace EcoPower_Logistics.DataAccess.Repository
 {
     public class UnitOfWork:IUnitOfWork
     {
-        private readonly ApplicationDbContext _db;
+        private readonly SuperStoreContext _db;
         public ICustomerRepository CustomerRepository { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext db)
+        public UnitOfWork(SuperStoreContext db)
         {
             _db = db;
             CustomerRepository = new CustomerRepository(_db);
