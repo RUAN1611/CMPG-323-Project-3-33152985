@@ -1,0 +1,17 @@
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.csproj.AssemblyReference.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.AssemblyInfoInputs.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.AssemblyInfo.cs
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.csproj.CoreCompileInputs.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.deps.json
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.runtimeconfig.json
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.Models.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\bin\Debug\net6.0\EcoPower_Logistics.Models.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.csproj.CopyComplete
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\refint\EcoPower_Logistics.DataAccess.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\EcoPower_Logistics.DataAccess.genruntimeconfig.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.DataAccess\obj\Debug\net6.0\ref\EcoPower_Logistics.DataAccess.dll

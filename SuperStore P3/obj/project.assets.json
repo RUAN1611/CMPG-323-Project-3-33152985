@@ -4096,6 +4096,47 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "EcoPower_Logistics.DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EcoPower_Logistics.Models": "1.0.0",
+          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.21",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.21",
+          "Microsoft.AspNetCore.Identity.UI": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.21",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Sqlite": "6.0.21",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16"
+        },
+        "compile": {
+          "bin/placeholder/EcoPower_Logistics.DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EcoPower_Logistics.DataAccess.dll": {}
+        }
+      },
+      "EcoPower_Logistics.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.21",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.21",
+          "Microsoft.AspNetCore.Identity.UI": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.21",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.21",
+          "Microsoft.EntityFrameworkCore.Sqlite": "6.0.21",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16"
+        },
+        "compile": {
+          "bin/placeholder/EcoPower_Logistics.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EcoPower_Logistics.Models.dll": {}
+        }
       }
     }
   },
@@ -11481,10 +11522,22 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "EcoPower_Logistics.DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../EcoPower_Logistics.DataAccess/EcoPower_Logistics.DataAccess.csproj",
+      "msbuildProject": "../EcoPower_Logistics.DataAccess/EcoPower_Logistics.DataAccess.csproj"
+    },
+    "EcoPower_Logistics.Models/1.0.0": {
+      "type": "project",
+      "path": "../EcoPower_Logistics.Models/EcoPower_Logistics.Models.csproj",
+      "msbuildProject": "../EcoPower_Logistics.Models/EcoPower_Logistics.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "EcoPower_Logistics.DataAccess >= 1.0.0",
+      "EcoPower_Logistics.Models >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.21",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.21",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.21",
@@ -11528,7 +11581,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Users\\Ruan\\source\\repos\\RUAN1611\\CMPG-323-Project-3-33152985\\EcoPower_Logistics.DataAccess\\EcoPower_Logistics.DataAccess.csproj": {
+              "projectPath": "D:\\Users\\Ruan\\source\\repos\\RUAN1611\\CMPG-323-Project-3-33152985\\EcoPower_Logistics.DataAccess\\EcoPower_Logistics.DataAccess.csproj"
+            },
+            "D:\\Users\\Ruan\\source\\repos\\RUAN1611\\CMPG-323-Project-3-33152985\\EcoPower_Logistics.Models\\EcoPower_Logistics.Models.csproj": {
+              "projectPath": "D:\\Users\\Ruan\\source\\repos\\RUAN1611\\CMPG-323-Project-3-33152985\\EcoPower_Logistics.Models\\EcoPower_Logistics.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EcoPower_Logistics.Models
+build_property.ProjectDir = D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\

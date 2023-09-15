@@ -846,3 +846,7 @@ D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\ob
 D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\obj\Debug\net6.0\EcoPower_Logistics.pdb
 D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\obj\Debug\net6.0\EcoPower_Logistics.genruntimeconfig.cache
 D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\obj\Debug\net6.0\ref\EcoPower_Logistics.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\bin\Debug\net6.0\EcoPower_Logistics.Models.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\bin\Debug\net6.0\EcoPower_Logistics.DataAccess.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\SuperStore P3\bin\Debug\net6.0\EcoPower_Logistics.Models.pdb

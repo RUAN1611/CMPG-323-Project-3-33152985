@@ -6,39 +6,39 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Data;
 using Models;
+using Data;
+using EcoPower_Logistics.DataAccess.Repository.IRepository;
 
 namespace Controllers
 {
     [Authorize]
     public class CustomersController : Controller
     {
-        private readonly SuperStoreContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CustomersController(SuperStoreContext context)
+        public CustomersController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return _context.Customers != null ?
-                        View(await _context.Customers.ToListAsync()) :
+            return _unitOfWork.CustomerRepository.GetAll() != null ?
+                        View(await _unitOfWork.CustomerRepository.GetAll()) :
                         Problem("Entity set 'SuperStoreContext.Customers'  is null.");
         }
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Customers == null)
+            if (id == null || _unitOfWork.CustomerRepository == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customer = await _unitOfWork.CustomerRepository.Get(m => m.CustomerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -62,8 +62,8 @@ namespace Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
+                _unitOfWork.CustomerRepository.Add(customer);
+                _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(customer);
@@ -72,12 +72,12 @@ namespace Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Customers == null)
+            if (id == null || _unitOfWork.CustomerRepository == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _unitOfWork.CustomerRepository.GetById(id);
             if (customer == null)
             {
                 return NotFound();
@@ -101,8 +101,8 @@ namespace Controllers
             {
                 try
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.CustomerRepository.Update(customer);
+                    _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,13 +123,12 @@ namespace Controllers
         // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Customers == null)
+            if (id == null || _unitOfWork.CustomerRepository == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customer = await _unitOfWork.CustomerRepository.Get(m => m.CustomerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -143,23 +142,23 @@ namespace Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Customers == null)
+            if (_unitOfWork.CustomerRepository == null)
             {
                 return Problem("Entity set 'SuperStoreContext.Customers'  is null.");
             }
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _unitOfWork.CustomerRepository.GetById(id);
             if (customer != null)
             {
-                _context.Customers.Remove(customer);
+                _unitOfWork.CustomerRepository.Remove(customer);
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-            return (_context.Customers?.Any(e => e.CustomerId == id)).GetValueOrDefault();
+            return (_unitOfWork.CustomerRepository.Exists(e => e.CustomerId == id));
         }
     }
 }
