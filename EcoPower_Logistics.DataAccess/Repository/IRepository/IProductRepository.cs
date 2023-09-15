@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace EcoPower_Logistics.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IProductRepository : IRepository<Product>
     {
-        ICustomerRepository CustomerRepository { get; }
-        IProductRepository ProductRepository { get; }
-        void Save();
+        void Update(Product product);
     }
 }

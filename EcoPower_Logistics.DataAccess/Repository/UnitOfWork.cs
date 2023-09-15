@@ -12,11 +12,13 @@ namespace EcoPower_Logistics.DataAccess.Repository
     {
         private readonly SuperStoreContext _db;
         public ICustomerRepository CustomerRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
 
         public UnitOfWork(SuperStoreContext db)
         {
             _db = db;
             CustomerRepository = new CustomerRepository(_db);
+            ProductRepository = new ProductRepository(_db);
         }
 
         public void Save()
