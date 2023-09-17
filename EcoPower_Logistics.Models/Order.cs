@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -21,6 +22,7 @@ namespace Models
         public string? DeliveryAddress { get; set; }
 
         [DisplayName("Customer")]
+        [ValidateNever]
         public virtual Customer Customer { get; set; } = null!;
         [DisplayName("Order Details")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

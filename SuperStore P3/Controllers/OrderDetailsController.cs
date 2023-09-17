@@ -8,38 +8,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Models;
+using EcoPower_Logistics.DataAccess.Repository.IRepository;
 
 namespace Controllers
 {
     [Authorize]
     public class OrderDetailsController : Controller
     {
-        private readonly SuperStoreContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderDetailsController(SuperStoreContext context)
+        public OrderDetailsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: OrderDetails
         public async Task<IActionResult> Index()
         {
-            var superStoreContext = _context.OrderDetails.Include(o => o.Order).Include(o => o.Product);
-            return View(await superStoreContext.ToListAsync());
+            var superStoreContext = _unitOfWork.OrderDetailsRepository.GetAll(includeEntities:"Order,Product");
+            return View(await superStoreContext);
         }
 
         // GET: OrderDetails/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.OrderDetails == null)
+            if (id == null || _unitOfWork.OrderDetailsRepository == null)
             {
                 return NotFound();
             }
 
-            var orderDetail = await _context.OrderDetails
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.OrderDetailsId == id);
+            var orderDetail = await _unitOfWork.OrderDetailsRepository.Get(x => x.OrderDetailsId == id, includeEntities:"Order,Product");
             if (orderDetail == null)
             {
                 return NotFound();
@@ -49,10 +47,10 @@ namespace Controllers
         }
 
         // GET: OrderDetails/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            ViewData["OrderId"] = new SelectList(await _unitOfWork.OrderRepository.GetAll(), "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(await _unitOfWork.ProductRepository.GetAll(), "ProductId", "ProductId");
             return View();
         }
 
@@ -65,30 +63,30 @@ namespace Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orderDetail);
-                await _context.SaveChangesAsync();
+                _unitOfWork.OrderDetailsRepository.Add(orderDetail);
+                _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", orderDetail.ProductId);
+            ViewData["OrderId"] = new SelectList(await _unitOfWork.OrderRepository.GetAll(), "OrderId", "OrderId", orderDetail.OrderId);
+            ViewData["ProductId"] = new SelectList(await _unitOfWork.ProductRepository.GetAll(), "ProductId", "ProductId", orderDetail.ProductId);
             return View(orderDetail);
         }
 
         // GET: OrderDetails/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.OrderDetails == null)
+            if (id == null || _unitOfWork.OrderDetailsRepository == null)
             {
                 return NotFound();
             }
 
-            var orderDetail = await _context.OrderDetails.FindAsync(id);
+            var orderDetail = await _unitOfWork.OrderDetailsRepository.GetById(id);
             if (orderDetail == null)
             {
                 return NotFound();
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", orderDetail.ProductId);
+            ViewData["OrderId"] = new SelectList(await _unitOfWork.OrderRepository.GetAll(), "OrderId", "OrderId", orderDetail.OrderId);
+            ViewData["ProductId"] = new SelectList(await _unitOfWork.ProductRepository.GetAll(), "ProductId", "ProductId", orderDetail.ProductId);
             return View(orderDetail);
         }
 
@@ -108,8 +106,8 @@ namespace Controllers
             {
                 try
                 {
-                    _context.Update(orderDetail);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.OrderDetailsRepository.Update(orderDetail);
+                    _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,23 +122,20 @@ namespace Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", orderDetail.ProductId);
+            ViewData["OrderId"] = new SelectList(await _unitOfWork.OrderRepository.GetAll(), "OrderId", "OrderId", orderDetail.OrderId);
+            ViewData["ProductId"] = new SelectList(await _unitOfWork.ProductRepository.GetAll(), "ProductId", "ProductId", orderDetail.ProductId);
             return View(orderDetail);
         }
 
         // GET: OrderDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.OrderDetails == null)
+            if (id == null || _unitOfWork.OrderDetailsRepository == null)
             {
                 return NotFound();
             }
 
-            var orderDetail = await _context.OrderDetails
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.OrderDetailsId == id);
+            var orderDetail = _unitOfWork.OrderDetailsRepository.Get(x => x.OrderDetailsId == id, includeEntities: "Order,Product");
             if (orderDetail == null)
             {
                 return NotFound();
@@ -154,23 +149,23 @@ namespace Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.OrderDetails == null)
+            if (_unitOfWork.OrderDetailsRepository == null)
             {
                 return Problem("Entity set 'SuperStoreContext.OrderDetails'  is null.");
             }
-            var orderDetail = await _context.OrderDetails.FindAsync(id);
+            var orderDetail = await _unitOfWork.OrderDetailsRepository.GetById(id);
             if (orderDetail != null)
             {
-                _context.OrderDetails.Remove(orderDetail);
+                _unitOfWork.OrderDetailsRepository.Remove(orderDetail);
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderDetailExists(int id)
         {
-            return (_context.OrderDetails?.Any(e => e.OrderDetailsId == id)).GetValueOrDefault();
+            return (_unitOfWork.OrderDetailsRepository.Exists(e => e.OrderDetailsId == id));
         }
     }
 }
