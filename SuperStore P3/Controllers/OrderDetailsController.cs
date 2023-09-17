@@ -25,8 +25,8 @@ namespace Controllers
         // GET: OrderDetails
         public async Task<IActionResult> Index()
         {
-            var superStoreContext = _unitOfWork.OrderDetailsRepository.GetAll(includeEntities:"Order,Product");
-            return View(await superStoreContext);
+            var superStoreContext = await _unitOfWork.OrderDetailsRepository.GetAll(includeEntities:"Order,Product");
+            return View(superStoreContext);
         }
 
         // GET: OrderDetails/Details/5
@@ -135,7 +135,7 @@ namespace Controllers
                 return NotFound();
             }
 
-            var orderDetail = _unitOfWork.OrderDetailsRepository.Get(x => x.OrderDetailsId == id, includeEntities: "Order,Product");
+            var orderDetail = await _unitOfWork.OrderDetailsRepository.Get(x => x.OrderDetailsId == id, includeEntities:"Order,Product");
             if (orderDetail == null)
             {
                 return NotFound();

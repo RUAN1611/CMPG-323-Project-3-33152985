@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -16,8 +17,9 @@ namespace Models
         public int Quantity { get; set; }
         [DisplayName("Discount")]
         public double? Discount { get; set; }
-
+        [ValidateNever]
         public virtual Order Order { get; set; } = null!;
+        [ValidateNever]
         public virtual Product Product { get; set; } = null!;
     }
 }

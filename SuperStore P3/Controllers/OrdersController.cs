@@ -25,8 +25,8 @@ namespace Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var superStoreContext = _unitOfWork.OrderRepository.GetAll(includeEntities:"Customer");
-            return View(await superStoreContext);
+            var superStoreContext = await _unitOfWork.OrderRepository.GetAll(includeEntities:"Customer");
+            return View(superStoreContext);
         }
 
         // GET: Orders/Details/5
