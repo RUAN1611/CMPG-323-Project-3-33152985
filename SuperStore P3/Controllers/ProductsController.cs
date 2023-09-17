@@ -8,37 +8,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Models;
+using EcoPower_Logistics.DataAccess.Repository.IRepository;
 
 namespace Controllers
 {
     [Authorize]
     public class ProductsController : Controller
     {
-        private readonly SuperStoreContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsController(SuperStoreContext context)
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return _context.Products != null ?
-                        View(await _context.Products.ToListAsync()) :
+            return _unitOfWork.ProductRepository != null ?
+                        View(await _unitOfWork.ProductRepository.GetAll()) :
                         Problem("Entity set 'SuperStoreContext.Products'  is null.");
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _unitOfWork.ProductRepository == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = await _unitOfWork.ProductRepository.Get(m => m.ProductId == id);
             if (product == null)
             {
                 return NotFound();
@@ -62,8 +62,8 @@ namespace Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ProductRepository.Add(product);
+                _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -72,12 +72,12 @@ namespace Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _unitOfWork.ProductRepository == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _unitOfWork.ProductRepository.GetById(id);
             if (product == null)
             {
                 return NotFound();
@@ -101,8 +101,8 @@ namespace Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ProductRepository.Update(product);
+                    _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,13 +123,12 @@ namespace Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _unitOfWork.ProductRepository == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = await _unitOfWork.ProductRepository.Get(m => m.ProductId == id);
             if (product == null)
             {
                 return NotFound();
@@ -143,23 +142,23 @@ namespace Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Products == null)
+            if (_unitOfWork.ProductRepository == null)
             {
                 return Problem("Entity set 'SuperStoreContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _unitOfWork.ProductRepository.GetById(id);
             if (product != null)
             {
-                _context.Products.Remove(product);
+                _unitOfWork.ProductRepository.Remove(product);
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_unitOfWork.ProductRepository.Exists(e => e.ProductId == id));
         }
     }
 }

@@ -26,13 +26,21 @@ namespace EcoPower_Logistics.DataAccess.Repository
             await dbSet.AddAsync(entity);
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>>? filter)
+        public async Task<T> Get(Expression<Func<T, bool>>? filter, string? includeEntities = null)
         {
             IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+
+            if (!string.IsNullOrEmpty(includeEntities))
+            {
+                foreach (var entity in includeEntities.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(entity); // Allows users to include related entities.
+                }
             }
 
             return await query.FirstOrDefaultAsync();
@@ -60,9 +68,17 @@ namespace EcoPower_Logistics.DataAccess.Repository
             return false;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll(string? includeEntities = null)
         {
             IQueryable<T> query = dbSet;
+
+            if (!string.IsNullOrEmpty(includeEntities))
+            {
+                foreach (var entity in includeEntities.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(entity); // Allows users to include related entities.
+                }
+            }
 
             return query;
         }

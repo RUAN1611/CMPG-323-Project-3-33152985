@@ -8,37 +8,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Data;
+using EcoPower_Logistics.DataAccess.Repository.IRepository;
 
 namespace Controllers
 {
     [Authorize]
     public class OrdersController : Controller
     {
-        private readonly SuperStoreContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrdersController(SuperStoreContext context)
+        public OrdersController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var superStoreContext = _context.Orders.Include(o => o.Customer);
-            return View(await superStoreContext.ToListAsync());
+            var superStoreContext = await _unitOfWork.OrderRepository.GetAll(includeEntities:"Customer");
+            return View(superStoreContext);
         }
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _unitOfWork.OrderRepository == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+            var order = await _unitOfWork.OrderRepository.Get(m => m.OrderId == id, includeEntities:"Customer");
             if (order == null)
             {
                 return NotFound();
@@ -48,9 +47,9 @@ namespace Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+            ViewData["CustomerId"] = new SelectList(await _unitOfWork.CustomerRepository.GetAll(), "CustomerId", "CustomerId");
             return View();
         }
 
@@ -63,28 +62,28 @@ namespace Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
+                _unitOfWork.OrderRepository.Add(order);
+                _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", order.CustomerId);
+            ViewData["CustomerId"] = new SelectList(await _unitOfWork.CustomerRepository.GetAll(), "CustomerId", "CustomerId", order.CustomerId);
             return View(order);
         }
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _unitOfWork.OrderRepository == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _unitOfWork.OrderRepository.GetById(id);
             if (order == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", order.CustomerId);
+            ViewData["CustomerId"] = new SelectList(await _unitOfWork.CustomerRepository.GetAll(), "CustomerId", "CustomerId", order.CustomerId);
             return View(order);
         }
 
@@ -104,8 +103,8 @@ namespace Controllers
             {
                 try
                 {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.OrderRepository.Update(order);
+                    _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,21 +119,19 @@ namespace Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", order.CustomerId);
+            ViewData["CustomerId"] = new SelectList(await _unitOfWork.CustomerRepository.GetAll(), "CustomerId", "CustomerId", order.CustomerId);
             return View(order);
         }
 
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (id == null || _unitOfWork.OrderRepository == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+            var order = await _unitOfWork.OrderRepository.Get(m => m.OrderId == id, includeEntities:"Customer");
             if (order == null)
             {
                 return NotFound();
@@ -148,23 +145,23 @@ namespace Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Orders == null)
+            if (_unitOfWork.OrderRepository == null)
             {
                 return Problem("Entity set 'SuperStoreContext.Orders'  is null.");
             }
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _unitOfWork.OrderRepository.GetById(id);
             if (order != null)
             {
-                _context.Orders.Remove(order);
+                _unitOfWork.OrderRepository.Remove(order);
             }
 
-            await _context.SaveChangesAsync();
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-            return (_context.Orders?.Any(e => e.OrderId == id)).GetValueOrDefault();
+            return (_unitOfWork.OrderRepository.Exists(e => e.OrderId == id));
         }
     }
 }
