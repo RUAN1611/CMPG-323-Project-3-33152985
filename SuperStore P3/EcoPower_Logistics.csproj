@@ -29,8 +29,4 @@
     <ProjectReference Include="..\EcoPower_Logistics.Models\EcoPower_Logistics.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Documentation\Images\" />
-  </ItemGroup>
-
 </Project>
