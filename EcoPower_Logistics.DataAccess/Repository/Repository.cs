@@ -26,6 +26,7 @@ namespace EcoPower_Logistics.DataAccess.Repository
             await dbSet.AddAsync(entity);
         }
 
+        // IncludeEntities allows a controller to include related entities in their methods.
         public async Task<T> Get(Expression<Func<T, bool>>? filter, string? includeEntities = null)
         {
             IQueryable<T> query = dbSet;
@@ -51,6 +52,7 @@ namespace EcoPower_Logistics.DataAccess.Repository
             return await dbSet.FindAsync(id);
         }
 
+        // Method used to check if a specific record exists for an entity table.
         public bool Exists(Expression<Func<T, bool>>? filter)
         {
             IQueryable<T> query = dbSet;
@@ -68,6 +70,7 @@ namespace EcoPower_Logistics.DataAccess.Repository
             return false;
         }
 
+        // IncludeEntities allows a controller to include related entities in their methods.
         public async Task<IEnumerable<T>> GetAll(string? includeEntities = null)
         {
             IQueryable<T> query = dbSet;
