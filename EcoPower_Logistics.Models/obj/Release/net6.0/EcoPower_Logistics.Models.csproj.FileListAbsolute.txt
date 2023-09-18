@@ -1,0 +1,14 @@
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\bin\Release\net6.0\EcoPower_Logistics.Models.deps.json
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\bin\Release\net6.0\EcoPower_Logistics.Models.runtimeconfig.json
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\bin\Release\net6.0\EcoPower_Logistics.Models.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\bin\Release\net6.0\EcoPower_Logistics.Models.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.csproj.AssemblyReference.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.AssemblyInfoInputs.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.AssemblyInfo.cs
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.csproj.CoreCompileInputs.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\refint\EcoPower_Logistics.Models.dll
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.pdb
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\EcoPower_Logistics.Models.genruntimeconfig.cache
+D:\Users\Ruan\source\repos\RUAN1611\CMPG-323-Project-3-33152985\EcoPower_Logistics.Models\obj\Release\net6.0\ref\EcoPower_Logistics.Models.dll

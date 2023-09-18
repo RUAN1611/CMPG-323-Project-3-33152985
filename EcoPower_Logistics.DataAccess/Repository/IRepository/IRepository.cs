@@ -10,7 +10,8 @@ namespace EcoPower_Logistics.DataAccess.Repository.IRepository
     public interface IRepository<T> where T : class
     {
         /* IMPORTANT WHEN IMPLEMENTING includeEntities: 
-         * includeEntities:"T" in Implementation. Do NOT INCLUDE a SPACE. For example, NOT includeEntities: "T" */
+         * includeEntities:"T" in Implementation. Do NOT INCLUDE a SPACE. For example, 
+         * includeEntities: "T" */
         Task<IEnumerable<T>> GetAll(string? includeEntities = null);
         Task<T> Get(Expression<Func<T, bool>>? filter, string? includeEntities = null);
         Task<T> GetById(int? id);

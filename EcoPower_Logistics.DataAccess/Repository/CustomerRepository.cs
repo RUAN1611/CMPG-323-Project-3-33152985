@@ -11,16 +11,13 @@ namespace EcoPower_Logistics.DataAccess.Repository
 {
     public class CustomerRepository:Repository<Customer>, ICustomerRepository
     {
-        private readonly SuperStoreContext _db;
-
         public CustomerRepository(SuperStoreContext db) : base(db)
         {
-            _db = db;
         }
 
         public void Update(Customer customer)
         {
-            _db.Update(customer);
+            dbSet.Update(customer);
         }
     }
 }
